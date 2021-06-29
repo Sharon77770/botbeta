@@ -8,8 +8,7 @@ from bs4 import BeautifulSoup
 
 intents=discord.Intents.default()
 bot = Bot(command_prefix='!', intents=intents)
-
-
+userList = {}
 
 @bot.event
 async def on_ready():
@@ -34,190 +33,64 @@ async def 설명(ctx):
 
 @bot.command()
 async def 도박참여(ctx):
-    file = open("playerInfo.txt", "r")
-    if not file.read():
-        file.close()
-        file = open("playerInfo.txt", "w")
-        file.write(str(ctx.author) + " " + "100000\'")
-        file.close()
+    if not userList:
+        userList[str(ctx.author)] = 100000
         await ctx.send(ctx.author.mention + "님이 게임에 참가하셨습니다.  (잔액:100000원)")
         return
         
     
-    file.close()
-    file = open("playerInfo.txt", "r")
-    infos = file.read().split("\'")
-    for info in infos:
-        if not info:
-            break
-        name = info.split(" ")
-
-        if name[0] == str(ctx.author) :
+    for name in userList:
+        if name == str(ctx.author) :
             await ctx.send(ctx.author.mention + "님은 이미 게임에 참가하셨습니다.")        
             return
 
-    
-    file.close()
-    file = open("playerInfo.txt", "a")
-    file.write(str(ctx.author) + " " + "100000\'")
-    
-    file.close()
+    userList[str(ctx.author)] = 100000
 
     await ctx.send(ctx.author.mention + "님이 게임에 참가하셨습니다.  (잔액:100000원)")
     
 @bot.command()
 async def 잔액(ctx):
-    file = open("playerInfo.txt", "r")
-    infos = file.read().split("\'")
-    for info1 in infos:
-        if not info1:
-            break
-        info = info1.split(" ")
-
-        if info[0] == str(ctx.author) :
-            await ctx.send(ctx.author.mention + "님의 잔액은 " + info[1] + "원 입니다.")
-            file.close()
+    for name in userList:
+        if name == str(ctx.author) :
+            await ctx.send(ctx.author.mention + "님의 잔액은 " + str(userList[name]) + "원 입니다.")
             return
-
-    file.close()
 
 @bot.command()
 async def 홀(ctx):
-    file = open("playerInfo.txt", "r")
+    for name in userList:
+        if not name:
+            return
 
-    infos = file.read().split("\'")
-    newMoney = ""
-    cnt = 0
-
-    for info1 in infos:
-        cnt += 1
-        if not info1:
-            break
-        info = info1.split(" ")
-
-        if info[0] == str(ctx.author) :
-            rand = randint(0, 3)
+        if name == str(ctx.author):
+            rand = randint(0, 2)
 
             if rand == 0:
-                file.close()
-                file = open("playerInfo.txt", "r")
-                infoMsg = file.read()
-                newInfoMsg = ""
-                m = infoMsg.split("\'")
-
-                for n in range(0, len(m) + 1):
-                    if not m[n] :
-                        break
-                    m1 = m[n].split(" ")
-
-                    if m1[0] == info[0]:
-                        m1[1] = str(int(m1[1]) + int(int(m1[1]) / 2))
-                        newMoney = m1[1]
-                        newInfoMsg += m1[0] + " " + m1[1] + "\'"
-                    else:
-                        newInfoMsg += m[n] + "\'"
-
-                file.close()
-                file = open("playerInfo.txt", "w")
-                file.write(newInfoMsg)
-                file.close()
-
-                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + newMoney + "원)")
-                return
+                userList[name] += userList[name] / 2
+                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                break
             else:
-                file.close()
-                file = open("playerInfo.txt", "r")
-                infoMsg = file.read()
-                newInfoMsg = ""
-                m = infoMsg.split("\'")
-                for n in range(0, len(m) + 1):
-                    if not m[n]:
-                        break
+                userList[name] -= int(userList[name] * 0.2)
+                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                break
 
-                    m1 = m[n].split(" ")
-
-                    if m1[0] == info[0]:
-                        m1[1] = str(int(m1[1]) - int(int(m1[1]) * 0.2))
-                        newMoney = m1[1]
-                        newInfoMsg += m1[0] + " " + m1[1] + "\'"
-                    else:
-                        newInfoMsg += m[n] + "\'"
-
-                file.close()
-                file = open("playerInfo.txt", "w")
-                file.write(newInfoMsg)
-                file.close()
-                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + newMoney + "원)")
-                return
 
 @bot.command()
 async def 짝(ctx):
-    file = open("playerInfo.txt", "r")
+     for name in userList:
+        if not name:
+            return
 
-    infos = file.read().split("\'")
-    newMoney = ""
-    cnt = 0
-
-    for info1 in infos:
-        cnt += 1
-        if not info1:
-            break
-
-
-        info = info1.split(" ")
-
-        if info[0] == str(ctx.author) :
-            rand = randint(0, 3)
+        if name == str(ctx.author):
+            rand = randint(0, 2)
 
             if rand == 0:
-                file.close()
-                file = open("playerInfo.txt", "r")
-                infoMsg = file.read()
-                newInfoMsg = ""
-                m = infoMsg.split("\'")
-                for n in range(0, len(m) + 1):
-                    if not m[n]:
-                        break
-                    m1 = m[n].split(" ")
-
-                    if m1[0] == info[0]:
-                        m1[1] = str(int(m1[1]) + int(int(m1[1]) / 2))
-                        newMoney = m1[1]
-                        newInfoMsg += m1[0] + " " + m1[1] + "\'"
-                    else:
-                        newInfoMsg += m[n] + "\'"
-
-                file.close()
-                file = open("playerInfo.txt", "w")
-                file.write(newInfoMsg)
-                file.close()
-                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + newMoney + "원)")
-                return
+                userList[name] += userList[name] / 2
+                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                break
             else:
-                file.close()
-                file = open("playerInfo.txt", "r")
-                infoMsg = file.read()
-                newInfoMsg = ""
-                m = infoMsg.split("\'")
-                for n in range(0, len(m) + 1):
-                    if not m[n]:
-                        break
-
-                    m1 = m[n].split(" ")
-
-                    if m1[0] == info[0]:
-                        m1[1] = str(int(m1[1]) - int(int(m1[1]) * 0.2))
-                        newMoney = m1[1]
-                        newInfoMsg += m1[0] + " " + m1[1] + "\'"
-                    else:
-                        newInfoMsg += m[n] + "\'"
-
-                file.close()
-                file = open("playerInfo.txt", "w")
-                file.write(newInfoMsg)
-                file.close()
-                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + newMoney + "원)")
-                return
+                userList[name] -= int(userList[name] * 0.2)
+                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                break
 
 @bot.command()
 async def 랭킹(ctx):
@@ -225,14 +98,11 @@ async def 랭킹(ctx):
 
     }
 
-    file = open("playerInfo.txt", "r")
-    infos = file.read().split("\'")
-
-    for info1 in infos:
-        if not info1 :
+    for name in userList:
+        if not name :
             break
-        name = info1.split(" ")
-        rankMap[name[0].split("#")[0]] = int(name[1])
+
+        rankMap[name.split("#")[0]] = str(userList[name])
 
     sdict= sorted(rankMap.items(), key=lambda x: x[1], reverse=True)
 
@@ -245,6 +115,7 @@ async def 랭킹(ctx):
         i += 1
 
     if rankingMsg == "-랭킹-\n\n":
+        await ctx.send('참가자 없음.')    
         return
 
     await ctx.send(rankingMsg)
@@ -260,6 +131,10 @@ async def 한강물(ctx):
     str1 = str(msg)
 
     str1 = str1.split('\n')
+    if str1[3] == '통신오류':
+        await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참조해주세요.')
+        return
+
     str1 = str1[4].split('\t')
     str1 = str1[13].split('\r')
     msg = str1[0]
