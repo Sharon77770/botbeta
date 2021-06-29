@@ -122,15 +122,11 @@ async def 랭킹(ctx):
 
 @bot.command()
 async def 한강물(ctx):
-    await ctx.send('1')
     target = request.urlopen('http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T#')
-    await ctx.send('2')
     soup = BeautifulSoup(target,'html.parser')
-    await ctx.send('3')
     msg = soup.find('tr', class_='site_S01001').find_next_sibling("tr").text
-    await ctx.send('4')
     str1 = str(msg)
-
+    await ctx.send(str1)
     str1 = str1.split('\n')
     if str1[3] == '통신오류':
         await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참조해주세요.')
