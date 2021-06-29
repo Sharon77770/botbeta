@@ -127,16 +127,13 @@ async def 한강물(ctx):
     msg = soup.find('tr', class_='site_S01001').find_next_sibling("tr").text
     str1 = str(msg)
     str1 = str1.split('\n')
-    await ctx.send(str1[3])
     if str1[3] == '통신오류':
         await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참조해주세요.')
-        return
-
-    str1 = str1[4].split('\t')
-    str1 = str1[13].split('\r')
-    msg = str1[0]
-
-    await ctx.send('현재 한강물의 온도는 ' + msg + '도 입니다.' + ctx.author.mention + '님께서 뛰어내리기 딱 좋은 온도네요^^')
+    else:
+        str1 = str1[4].split('\t')
+        str1 = str1[13].split('\r')
+        msg = str1[0]
+        await ctx.send('현재 한강물의 온도는 ' + msg + '도 입니다.' + ctx.author.mention + '님께서 뛰어내리기 딱 좋은 온도네요^^')
     
 
 bot.run(os.environ['token'])
