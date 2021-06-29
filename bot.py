@@ -126,8 +126,8 @@ async def 한강물(ctx):
     soup = BeautifulSoup(target,'html.parser')
     msg = soup.find('tr', class_='site_S01001').find_next_sibling("tr").text
     str1 = str(msg)
-    await ctx.send(str1)
     str1 = str1.split('\n')
+    await ctx.send(str1[3])
     if str1[3] == '통신오류':
         await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참조해주세요.')
         return
