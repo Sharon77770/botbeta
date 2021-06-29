@@ -128,9 +128,9 @@ async def 한강물(ctx):
     str1 = str(msg)
     str1 = str1.split('\n')
     if str1[3] == '통신오류':
-        await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.')
-    elif str1 == '장비점검':
-        await ctx.send('장비 점검으로 현재 수온을 확인할 수 없습니다.')
+        await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참고해주세요.')
+    elif str1[3] == '장비점검':
+        await ctx.send('장비 점검으로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참고해주세요.')
     else:
         str1 = str1[4].split('\t')
         str1 = str1[13].split('\r')
