@@ -13,9 +13,7 @@ userList = {}
 @bot.event
 async def on_ready():
     print(f'{bot.user} 에 로그인하였습니다!')
-    file = open("playerInfo.txt", "a")
-    file.write("")
-    file.close()
+
 
 @bot.command()
 async def hellothisisverification(ctx):
