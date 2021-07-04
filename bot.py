@@ -18,13 +18,13 @@ async def on_ready():
     file.close()
 
 @bot.command()
-async def 씨발(ctx):
-    await ctx.send(ctx.author.mention + "님 인생은 원래 ㅈ같은거에요^^")
+async def hellothisisverification(ctx):
+    await ctx.send("Sharon77770#0836")
 
 @bot.command()
 async def 설명(ctx):
-    await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n" + "이 봇은 현재 테스트중에 있으며 게임은 차차 추가 될 예정입니다."
-                    +"참가한 이후 나갈 수 없으며 봇이 업뎃되면 잔액이 초기화 됩니다.\잔액이 매우 부족할경우"
+    await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
+                    +"참가한 이후 나갈 수 없으며 봇이 업뎃되면 잔액이 초기화 됩니다.\n잔액이 매우 부족할경우"
                     +" 한강물 온도 체크후 입수하시면 됩니다.\n" + "\n"
 					+ "-게임 룰-\n" + "\n" + "-홀짝 게임 : 홀 또는 짝을 선택하여 참가합니다.(승리시 잔액의 50% 추가 획득, 패배시 잔액의 20%손실)\n" + "\n" + "*-명령어 목록-*\n"
 					+ "\n" + "!도박참여 : 도박에 참가합니다. 이 명령어를 사용해야 게임을 즐길 수 있습니다.\n"
