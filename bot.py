@@ -27,8 +27,7 @@ async def 설명(ctx):
 					+ "-게임 룰-\n" + "\n" + "-홀짝 게임 : 홀 또는 짝을 선택하여 참가합니다.(승리시 잔액의 50% 추가 획득, 패배시 잔액의 20%손실)\n" + "\n" + "*-명령어 목록-*\n"
 					+ "\n" + "!도박참여 : 도박에 참가합니다. 이 명령어를 사용해야 게임을 즐길 수 있습니다.\n"
 					+ "!잔액 : 현재 남은 잔액을 확인합니다. 잔액이 높을수록 게임의 부담이 높아지지만 랭킹에 오를 수 있습니다.\n" + "!홀 : 홀짝게임에 홀을 걸고 참가합니다.\n"
-					+ "!짝 : 홀짝게임에 짝을 걸고 참가합니다.\n" + "!랭킹 : 랭킹을 확인합니다.\n" + "!한강물 : 수질정보원에서 한강물 온도를 알아옵니다.")
-
+					+ "!짝 : 홀짝게임에 짝을 걸고 참가합니다.\n" + "!랭킹 : 랭킹을 확인합니다."
 @bot.command()
 async def 도박참여(ctx):
     if not userList:
@@ -118,22 +117,6 @@ async def 랭킹(ctx):
 
     await ctx.send(rankingMsg)
 
-@bot.command()
-async def 한강물(ctx):
-    target = request.urlopen('http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T#')
-    soup = BeautifulSoup(target,'html.parser')
-    msg = soup.find('tr', class_='site_S01001').find_next_sibling("tr").text
-    str1 = str(msg)
-    str1 = str1.split('\n')
-    if str1[3] == '통신오류':
-        await ctx.send('통신 오류로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참고해주세요.')
-    elif str1[3] == '장비점검':
-        await ctx.send('장비 점검으로 현재 수온을 확인할 수 없습니다.\n자세한 사항은 http://www.koreawqi.go.kr/wQSCHomeLayout_D.wq?action_type=T# 를 참고해주세요.')
-    else:
-        str1 = str1[4].split('\t')
-        str1 = str1[13].split('\r')
-        msg = str1[0]
-        await ctx.send('현재 한강물의 온도는 ' + msg + '도 입니다.' + ctx.author.mention + '님께서 뛰어내리기 딱 좋은 온도네요^^')
     
 
 bot.run(os.environ['token'])
