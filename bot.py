@@ -77,7 +77,7 @@ async def 홀(ctx):
                     await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 빚이 있으므로 1000원을 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
                     break
                 else:
-                    userList[name] += userList[name] / 2
+                    userList[name] += int(userList[name] / 2)
                     await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
                     break
             else:
@@ -106,7 +106,7 @@ async def 짝(ctx):
                     await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 빚이 있으므로 1000원을 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
                     break
                 else:
-                    userList[name] += userList[name] / 2
+                    userList[name] += int(userList[name] / 2)
                     await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
                     break
             else:
