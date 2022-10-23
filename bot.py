@@ -72,13 +72,23 @@ async def 홀(ctx):
             rand = randint(0, 2)
 
             if rand == 0:
-                userList[name] += userList[name] / 2
-                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
-                break
+                if userList[name] <= 0:
+                    userList[name] += 1000
+                    await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 빚이 있으므로 1000원을 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
+                else:
+                    userList[name] += userList[name] / 2
+                    await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
             else:
-                userList[name] -= int(userList[name] * 0.2)
-                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
-                break
+                if userList[name] <= 0:
+                    userList[name] -= 1000
+                    await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 빚이 있으므로 1000원을 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
+                else:
+                    userList[name] -= int(userList[name] * 0.2)
+                    await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
 
 
 @bot.command()
@@ -91,13 +101,23 @@ async def 짝(ctx):
             rand = randint(0, 2)
 
             if rand == 0:
-                userList[name] += userList[name] / 2
-                await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
-                break
+                if userList[name] <= 0:
+                    userList[name] += 1000
+                    await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 빚이 있으므로 1000원을 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
+                else:
+                    userList[name] += userList[name] / 2
+                    await ctx.send(ctx.author.mention + "\n*\"짝\"이 나왔습니다. 잔액의 50%를 얻습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
             else:
-                userList[name] -= int(userList[name] * 0.2)
-                await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
-                break
+                if userList[name] <= 0:
+                    userList[name] -= 1000
+                    await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 빚이 있으므로 1000원을 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
+                else:
+                    userList[name] -= int(userList[name] * 0.2)
+                    await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
+                    break
 
 @bot.command()
 async def 랭킹(ctx):
