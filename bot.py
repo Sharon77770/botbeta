@@ -3,11 +3,12 @@ import discord
 import os
 from random import *
 from discord.ext.commands import Bot
+from discord.ext import commands
 from discord.utils import get
 from discord import app_commands
 
 intents = discord.Intents.default()
-bot = Bot(command_prefix='/', intents=intents, help_command=None)
+bot = commands.Bot(intents=intents, help_command=None)
 userList = {}
 
 @bot.event
