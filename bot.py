@@ -1,10 +1,6 @@
-from sys import prefix
 import discord
 import os
 from random import *
-from discord.ext.commands import Bot
-from discord.utils import get
-from discord import app_commands
 
 intents = discord.Intents.default()
 bot = discord.Bot(intents=intents)
