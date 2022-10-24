@@ -22,12 +22,12 @@ async def on_message(message):
     if message.author.bot: 
         return
 
-    if message.content == '!설명'
+    if message.content.startswith('!설명')
         help(message.channel)
 
 
 
-def help(ctx):
+async def help(ctx):
     print('used help cmd')
     await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
                     +"참가한 이후 나갈 수 없으며 봇이 업뎃되면 잔액이 초기화 됩니다. 일정 시기마다 봇이 초기화 되므로 주의해 주시길 바랍니다.\n잔액이 매우 부족할경우"
