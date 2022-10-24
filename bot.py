@@ -8,6 +8,7 @@ from urllib import request
 from bs4 import BeautifulSoup
 
 intents=discord.Intents.default()
+intents.messages = True
 bot = Bot(command_prefix='!', intents=intents, help_command=None)
 userList = {}
 
