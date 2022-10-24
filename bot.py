@@ -8,7 +8,7 @@ from discord.utils import get
 from discord import app_commands
 
 intents = discord.Intents.default()
-bot = commands.Bot(intents=intents, help_command=None)
+bot = commands.Bot(command_prefix='/', intents=intents, help_command=None)
 userList = {}
 
 @bot.event
