@@ -13,6 +13,7 @@ userList = {}
 @bot.event
 async def on_ready():
     print(f'{bot.user} 에 로그인하였습니다!')
+    await bot.get_channel(1033741064168812698).send('봇 인증 이슈 테스트 중...')
 
 
 @bot.command()
