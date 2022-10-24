@@ -22,7 +22,7 @@ async def on_ready():
 async def on_message(message):
     if message.author.bot: 
         return
-    if message.content == '':
+    if message.content == '!help':
         await message.channel.send('.')
 
 
