@@ -7,7 +7,7 @@ from urllib import request
 from bs4 import BeautifulSoup
 
 intents=discord.Intents.default()
-bot = Bot(command_prefix='/', intents=intents, help_command=None)
+bot = Bot(command_prefix='!', intents=intents, help_command=None)
 userList = {}
 
 @bot.event
@@ -15,12 +15,9 @@ async def on_ready():
     print(f'{bot.user} 에 로그인하였습니다!')
 
 
-
-
-
-
 @bot.command()
 async def 설명(ctx):
+    print('used help cmd')
     await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
                     +"참가한 이후 나갈 수 없으며 봇이 업뎃되면 잔액이 초기화 됩니다. 일정 시기마다 봇이 초기화 되므로 주의해 주시길 바랍니다.\n잔액이 매우 부족할경우"
                     +" 한강물 온도 체크후 입수하시면 됩니다.\n" + "\n"
@@ -39,6 +36,7 @@ async def help(ctx):
 					+ "\n" + "!도박참여 : 도박에 참가합니다. 이 명령어를 사용해야 게임을 즐길 수 있습니다.\n"
 					+ "!잔액 : 현재 남은 잔액을 확인합니다. 잔액이 높을수록 게임의 부담이 높아지지만 랭킹에 오를 수 있습니다.\n" + "!홀 : 홀짝게임에 홀을 걸고 참가합니다.\n"
 					+ "!짝 : 홀짝게임에 짝을 걸고 참가합니다.\n" + "!랭킹 : 랭킹을 확인합니다.")
+		   
 		   
 		   
 @bot.command()
