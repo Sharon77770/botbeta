@@ -22,8 +22,10 @@ async def on_ready():
 async def on_message(message):
     if message.author.bot: 
         return
-
-    await message.channel.send('.')
+    
+    if message.content == '!시작'
+        await message.channel.send('.')
+    await message.channel.send(message.contenet)
 
 
 @bot.command()
