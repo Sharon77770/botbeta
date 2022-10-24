@@ -6,7 +6,7 @@ from discord.utils import get
 from discord import app_commands
 
 intents = discord.Intents.default()
-bot = Bot(command_prefix='!', intents=intents, help_command=None)
+bot = Bot(intents=intents, help_command=None)
 tree = app_commands.CommandTree(bot)
 userList = {}
 
