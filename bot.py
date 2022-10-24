@@ -1,3 +1,4 @@
+from sys import prefix
 import discord
 import os
 from random import *
@@ -6,7 +7,7 @@ from discord.utils import get
 from discord import app_commands
 
 intents = discord.Intents.default()
-bot = Bot(intents=intents, help_command=None)
+bot = Bot(prefix='', intents=intents, help_command=None)
 userList = {}
 
 @bot.event
