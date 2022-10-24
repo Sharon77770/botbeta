@@ -7,7 +7,7 @@ from discord.utils import get
 from urllib import request
 from bs4 import BeautifulSoup
 
-intents=discord.Intents.all()
+intents=discord.Intents.default()
 bot = Bot(command_prefix='!', intents=intents, help_command=None)
 userList = {}
 
