@@ -22,7 +22,7 @@ async def on_ready():
 async def on_message(message):
     if message.author.bot: 
         return
-    if message.content.startswith('$greet'):
+    if message.content == '':
         await message.channel.send('.')
 
 
