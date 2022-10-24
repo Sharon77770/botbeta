@@ -7,7 +7,6 @@ from discord import app_commands
 
 intents = discord.Intents.default()
 bot = Bot(intents=intents, help_command=None)
-tree = app_commands.CommandTree(bot)
 userList = {}
 
 @bot.event
@@ -15,7 +14,7 @@ async def on_ready():
     print(f'{bot.user} 에 로그인하였습니다!')
 
 
-@tree.command(name = "설명")
+@bot.slash_command()
 async def 설명(ctx):
     print('used help cmd')
     await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
@@ -27,7 +26,7 @@ async def 설명(ctx):
 					+ "!짝 : 홀짝게임에 짝을 걸고 참가합니다.\n" + "!랭킹 : 랭킹을 확인합니다.")
 		   
 		   
-@bot.command()
+@bot.slash_command()
 async def help(ctx):
     await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
                     +"참가한 이후 나갈 수 없으며 봇이 업뎃되면 잔액이 초기화 됩니다. 일정 시기마다 봇이 초기화 되므로 주의해 주시길 바랍니다.\n잔액이 매우 부족할경우"
@@ -39,7 +38,7 @@ async def help(ctx):
 		   
 		   
 		   
-@bot.command()
+@bot.slash_command()
 async def 도박참여(ctx):
     if not userList:
         userList[str(ctx.author)] = 100000
@@ -56,14 +55,14 @@ async def 도박참여(ctx):
 
     await ctx.send(ctx.author.mention + "님이 게임에 참가하셨습니다.  (잔액:100000원)")
     
-@bot.command()
+@bot.slash_command()
 async def 잔액(ctx):
     for name in userList:
         if name == str(ctx.author) :
             await ctx.send(ctx.author.mention + "님의 잔액은 " + str(userList[name]) + "원 입니다.")
             return
 
-@bot.command()
+@bot.slash_command()
 async def 홀(ctx):
     for name in userList:
         if not name:
@@ -92,7 +91,7 @@ async def 홀(ctx):
                     break
 
 
-@bot.command()
+@bot.slash_command()
 async def 짝(ctx):
      for name in userList:
         if not name:
@@ -120,7 +119,7 @@ async def 짝(ctx):
                     await ctx.send(ctx.author.mention + "\n*\"홀\"이 나왔습니다. 잔액의 20%를 잃습니다.*  (잔액:" + str(userList[name]) + "원)")
                     break
 
-@bot.command()
+@bot.slash_command()
 async def 랭킹(ctx):
     rankMap = {
 
