@@ -23,9 +23,7 @@ async def on_message(message):
     if message.author.bot: 
         return
     
-    if message == '!시작'
-        await message.channel.send('.')
-    await message.channel.send(message)
+    await message.channel.send(str(message.content))
 
 
 @bot.command()
