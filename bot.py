@@ -23,7 +23,7 @@ async def on_message(message):
     if message.author.bot: 
         return
     
-    await message.channel.send(str(message.content))
+    await message.channel.send('.')
 
 
 @bot.command()
