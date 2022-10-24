@@ -3,11 +3,11 @@ import os
 from random import *
 from discord.ext.commands import Bot
 from discord.utils import get
-from urllib import request
-from bs4 import BeautifulSoup
+from discord import app_commands
 
-intents=discord.Intents.default()
+intents = discord.Intents.default()
 bot = Bot(command_prefix='!', intents=intents, help_command=None)
+tree = app_commands.CommandTree(bot)
 userList = {}
 
 @bot.event
@@ -15,7 +15,7 @@ async def on_ready():
     print(f'{bot.user} 에 로그인하였습니다!')
 
 
-@bot.command()
+@tree.command(name = "설명")
 async def 설명(ctx):
     print('used help cmd')
     await ctx.send("-도박장에 오신걸 환영합니다!:D-\n" + "\n"
