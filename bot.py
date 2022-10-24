@@ -2,6 +2,7 @@ import discord
 import os
 from random import *
 from discord.ext.commands import Bot
+from discord.ext import commands
 from discord.utils import get
 from urllib import request
 from bs4 import BeautifulSoup
